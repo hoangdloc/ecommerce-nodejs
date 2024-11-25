@@ -1,8 +1,9 @@
 import compression from 'compression';
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import '~/dbs/init.mongodb';
+import router from './routes';
 
 const app = express();
 
@@ -14,12 +15,7 @@ app.use(compression());
 // init db
 
 // init routes
-app.get('/', (_req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json({
-    message: 'Welcome to the API'
-  });
-  next();
-});
+app.use('/', router);
 
 // handling error
 
